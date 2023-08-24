@@ -1,0 +1,50 @@
+/****************************************************************
+
+ Following is the class structure of the Node class:
+
+ class Node {
+     public int data;
+     public Node next;
+
+     Node()
+     {
+         this.data = 0;
+         this.next = null;
+     }
+     Node(int data)
+     {
+         this.data = data;
+         this.next = null;
+     }
+     Node(int data, Node next)
+     {
+         this.data = data;
+         this.next = next;
+     }
+ }
+
+ *****************************************************************/
+import java.util.*;
+
+public class Solution {
+    public static Node firstNode(Node head) {
+        // Write your code here.
+        HashSet<Node> hs = new HashSet<>();
+
+        if(head == null || head.next == null){
+            return null;
+        }
+
+        Node temp = head;
+
+        while(temp.next != null){
+            if(hs.contains(temp)){
+                return temp;
+            }
+            hs.add(temp);
+            temp = temp.next;
+        }
+
+        return null;
+    }
+}
