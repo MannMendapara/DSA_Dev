@@ -1,0 +1,67 @@
+/****************************************************************
+
+ Following is the class structure of the Node class:
+
+ class Node {
+     public int data;
+     public Node next;
+    
+     Node()
+     {
+         this.data = 0;
+         this.next = null;
+     }
+    
+     Node(int data)
+     {
+         this.data = data;
+         this.next = null;
+     }
+    
+     Node(int data, Node next)
+     {
+         this.data = data;
+         this.next = next;
+     }
+ }
+
+ *****************************************************************/
+import java.util.*;
+public class Solution {
+    public static boolean isPalindrome(Node head) {
+    if (head == null || head.next == null) return true;
+
+    Node fast = head;
+    Node slow = head;
+
+    while (fast != null && fast.next != null) {
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+
+    Node temp = reverse(slow);
+    Node l = head;
+
+    while (temp != null) {
+        if (temp.data != l.data) return false;
+        temp = temp.next;
+        l = l.next;
+    }
+    return true;
+}
+
+    public static Node reverse(Node head){
+        Node prev = null;
+        Node curr = head;
+        Node next = null;
+
+        while(curr != null){
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        return prev;
+    }
+}
