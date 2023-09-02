@@ -1,0 +1,101 @@
+/****************************************************************
+
+ Following is the class structure of the Node class:
+
+ class Node {
+     public int data;
+     public Node next;
+
+     Node()
+     {
+         this.data = 0;
+         this.next = null;
+     }
+
+     Node(int data)
+     {
+         this.data = data;
+         this.next = null;
+     }
+
+     Node(int data, Node next)
+     {
+         this.data = data;
+         this.next = next;
+     }
+ };
+
+ *****************************************************************/
+
+public class Solution {
+    public static Node deleteMiddle(Node head) {
+        // Write your code here.
+        if(head == null || head.next == null){
+            return null;
+        }
+        
+        Node t = head;
+        int count = 1;
+
+        while(t.next != null){
+            count++;
+            t = t.next;
+        }
+
+        int mid = count / 2;
+
+        t = head;
+        while(mid-- > 1){
+            t = t.next;
+        }
+
+        t.next = t.next.next;
+
+        return head;
+    }
+}
+
+//or
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode deleteMiddle(ListNode head) {
+
+        if(head == null && head.next == null){
+            return null;
+        }
+
+        ListNode fast = head;
+        ListNode slow = head;
+        ListNode temp = head;
+
+        while(fast != null && fast.next != null) 
+        {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+
+        if(temp.next == null){
+            return null;
+        }
+        
+        while(temp.next != slow){
+            temp = temp.next;
+        }
+        
+        if(temp.next != null){
+            temp.next = temp.next.next;
+        }
+
+        return head;
+    }
+}

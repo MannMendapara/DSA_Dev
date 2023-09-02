@@ -1,0 +1,38 @@
+class Solution {
+    public List<Integer> spiralOrder(int[][] m) {
+        List<Integer> ls = new ArrayList<>();
+        int rows = m.length;
+        int columns = m[0].length;
+        int bottom = rows - 1;
+        int top = 0;
+        int left = 0;
+        int right = columns - 1; // Corrected this line
+
+        int count = rows * columns;
+
+        while(count > 0) { // Change the condition to > 0
+            for(int i = left; i <= right; i++){
+                ls.add(m[top][i]);
+                count--;
+            }
+            top++;
+            for(int i = top; i <= bottom; i++){
+                ls.add(m[i][right]);
+                count--;
+            }
+            right--;
+            if (count == 0) break;
+            for(int i = right; i >= left; i--){
+                ls.add(m[bottom][i]);
+                count--;
+            }
+            bottom--;
+            for(int i = bottom; i >= top; i--){
+                ls.add(m[i][left]);
+                count--;
+            }
+            left++;
+        }
+        return ls;
+    }
+}
