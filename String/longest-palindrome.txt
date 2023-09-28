@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int longestPalindrome(string s) {
+        int arr[52] = {0};
+        // std::memset(arr, 0, sizeof(arr));
+
+        for(int i = 0; i < s.length(); i++){
+            if(s[i] >= 65 && s[i] <= 90){
+                arr[s[i] - 'A']++;
+            }else {
+                arr[26 + s[i] - 'a']++;
+            }
+        }
+
+        int ans = 0;
+        bool odd = false;
+
+        for(int i = 0; i < 52; i++){
+            ans += (arr[i]/2)*2;
+            if(arr[i] % 2 == 1) odd = true;
+        }
+
+        if(odd) ans = ans + 1;
+        return ans;
+    }
+};
